@@ -7,7 +7,6 @@ import javafx.application.Application;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.ColumnConstraints;
@@ -27,9 +26,13 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        
 
-        // main Stage
+
+        // Main Stage
+
+        GridPane gridPane = new GridPane();
+        Scene main_scene = new Scene(gridPane, 600, 400);
+
         Text main_appTitle = new Text("LinePlay"); main_appTitle.getStyleClass().add("title");
         Text main_byLine = new Text("By: Jon"); main_byLine.getStyleClass().add("byline");
 
@@ -38,8 +41,6 @@ public class App extends Application {
         Button main_enterFile = new Button("Choose File");
         Button main_enterText = new Button ("Enter Text");
          
-      
-        GridPane gridPane = new GridPane();
         gridPane.setPadding(new Insets(10));
         gridPane.setVgap(5);
         gridPane.setHgap(5);
@@ -106,11 +107,6 @@ public class App extends Application {
             file_gp.getRowConstraints().add(rc);
         }
 
-
-        
-
-
-
         main_enterFile.setOnAction(e -> {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open Resource File");
@@ -131,31 +127,57 @@ public class App extends Application {
                 file_message = new Text( "there was nothing there :()");
                 
             }
-            file_gp.add(new Text("Is this the right stuff?"), 1, 0);
+        
+            Text file_question = new Text("Is this the right stuff?");
+            file_question.getStyleClass().add("title");
+            file_message.getStyleClass().add("about");
+            
+            file_gp.add(file_question, 1, 0); 
             file_gp.add(file_message, 1, 1);
+
+            GridPane.setHalignment(file_question, HPos.CENTER);
+            GridPane.setHalignment(file_message, HPos.CENTER);
             
             stage.setScene(file_scene);
         });
 
+        Button file_goNext = new Button("Yes!");
+        Button file_goBack = new Button("Nope");
+        GridPane.setHalignment(file_goNext, HPos.LEFT);
+        GridPane.setHalignment(file_goBack, HPos.RIGHT);
+        file_gp.add(file_goNext, 2, 3);
+        file_gp.add(file_goBack, 0, 3);
 
+
+        file_goNext.setOnAction(e -> {
+            //stage.setScene(selection_scene);
+        });
+
+        file_goBack.setOnAction(e -> {
+            stage.setScene(main_scene);
+        });
 
         // TextBox Stage
 
-        Text textBox_message = new Text(150, 150, "text box message");
-        Group root2 = new Group(textBox_message);
-        Scene textBox_scene = new Scene(root2, 600, 400);          
+        GridPane text_gp = new GridPane();
+        Scene text_scene = new Scene(text_gp, 600, 400);  
+        text_gp.setStyle("-fx-background-color: #A3D5FF;");
 
         main_enterText.setOnAction(e -> {
-            stage.setScene(textBox_scene);
+            stage.setScene(text_scene);
         });
+
+
+
+        // Selection Stage
 
 
         
 
-        Scene scene = new Scene(gridPane, 600, 400);
-        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm()); // Load CSS
+        
+        main_scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm()); // Load CSS
         stage.setTitle("Sample Aplication");
-        stage.setScene(scene);
+        stage.setScene(main_scene);
         stage.show();
     }
 
