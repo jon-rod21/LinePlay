@@ -1,0 +1,19 @@
+.title {
+    -fx-font-family: "Cascadia Code";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-fill: rgb(0, 0, 0); /* Text color */
+}
+.byline {
+    -fx-font-family: "Cascadia Code";
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-fill: rgb(0, 0, 0); /* Text color */
+}
+
+.about {
+    -fx-font-family: "Cascadia Code";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-fill: rgb(0, 0, 0); /* Text color */
+}
