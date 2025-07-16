@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -165,6 +166,15 @@ public class App extends Application {
 
         main_enterText.setOnAction(e -> {
             stage.setScene(text_scene);
+        });
+
+        Text text_message = new Text("Type your code in here!");
+        TextField text_field = new TextField();
+        Button text_enter = new Button("Enter");
+
+        text_enter.setOnAction(e -> {
+            String text_input = text_field.getText();
+            // Here begins the utter bullshit of merging semi nice code (this) with the other bullshit (other code) hooray!
         });
 
 
