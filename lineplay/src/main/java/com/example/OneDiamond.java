@@ -12,8 +12,6 @@ public class OneDiamond {
     public String diamond(){
 
         int radius = (int)Math.ceil((((data.getCnt() * 1.0) / (2 * Math.PI)) + Math.round(data.getCnt() / 10.0))); // works until last point
-        System.out.println(radius);
-
         int maxLengthWord = 20;
         String print = "";
 
