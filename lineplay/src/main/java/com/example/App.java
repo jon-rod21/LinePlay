@@ -73,7 +73,7 @@ public class App extends Application {
             main_gp.getRowConstraints().add(rc);
         }
 
-        // Create UI components
+        // UI components
         Text main_appTitle = new Text("Line Play"); 
         main_appTitle.getStyleClass().add("title");
         Text main_byLine = new Text("By: Jon"); 
@@ -94,7 +94,7 @@ public class App extends Application {
         GridPane.setHalignment(main_enterFile, HPos.RIGHT);
         GridPane.setHalignment(main_enterText, HPos.LEFT);
 
-        // Add components to grid
+        // Add to grid
         main_gp.add(main_appTitle, 1, 0);
         main_gp.add(main_byLine, 1, 2);
         main_gp.add(main_about, 1, 1);
@@ -124,11 +124,6 @@ public class App extends Application {
         selectedFile = fileChooser.showOpenDialog(primaryStage);
         
         showFileConfirmation();
-        // if (selectedFile != null) {
-        //     showFileConfirmation();
-        // } else {
-        //     showFileConfirmation(); // Show error message
-        // }
     }
 
     /*================================= */

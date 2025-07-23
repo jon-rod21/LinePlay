@@ -1,5 +1,6 @@
 package com.example;
 
+/* works with multi-line comments too! */
 public class CodeData {
     int cnt;
     String fileContent;

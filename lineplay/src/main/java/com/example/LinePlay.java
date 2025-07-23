@@ -24,7 +24,6 @@ public class LinePlay {
 
     public String runReport() throws FileNotFoundException, IOException{
         Scanner fileScan = enteredText.isEmpty() ? new Scanner(selectedFile) : new Scanner(enteredText);
-        // Scanner fileScan = new Scanner(enteredText);
         CodeData fileData = fileReaderCounter(fileScan);
 
         switch (option){
@@ -50,12 +49,13 @@ public class LinePlay {
     
 
     private static CodeData fileReaderCounter(Scanner fileScan) throws IOException{
-        String codeChunk = fileScan.next();
+        String codeChunk;
         String retString = "";
         int cnt = 1;
         boolean open = false;
 
         while (fileScan.hasNext()){
+            codeChunk = fileScan.next();
             if (codeChunk.contains("\"\"")){
                 cnt++;
             }
@@ -72,7 +72,7 @@ public class LinePlay {
                 cnt++; 
             }
             retString += codeChunk + " ";
-            codeChunk = fileScan.next();
+            
         }
         return new CodeData(cnt, retString);
     }

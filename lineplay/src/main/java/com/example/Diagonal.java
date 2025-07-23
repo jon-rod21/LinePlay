@@ -49,10 +49,8 @@ public class Diagonal {
 
                     finalString += strToWrite;
                     cnt++; 
-                    
                 }
             }
-            
         }
         return finalString;
     }
