@@ -1,9 +1,6 @@
 package com.example;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class OneDiamond {
     CodeData data;
@@ -12,77 +9,13 @@ public class OneDiamond {
         this.data = data;
     }
 
-    public static class Token {
-        public enum Type {
-            STRING, SINGLE_LINE_COMMENT, MULTI_LINE_COMMENT, CODE
-        }
-        
-        private String value;
-        private Type type;
-        
-        public Token(String value, Type type) {
-            this.value = value;
-            this.type = type;
-        }
-        
-        public String getValue() { return value; }
-        public Type getType() { return type; }
-        
-        @Override
-        public String toString() {
-            return type + ": '" + value + "'";
-        }
-    }
-    // no work rn try later lmao
-    public static List<Token> tokenizeJavaCode(String content) {
-        List<Token> tokens = new ArrayList<>();
-        
-        Pattern pattern = Pattern.compile(
-            "/\\*[\\s\\S]*?\\*/" +           
-            "|//.*?(?=\\n|$)" +               
-            "|\"([^\"\\\\]|\\\\.)*\"" +      
-            "|\\S+"                          
-        );
-        
-        Matcher matcher = pattern.matcher(content);
-        
-        while (matcher.find()) {
-            String match = matcher.group();
-            Token.Type type;
-            
-            if (match.startsWith("/*")) {
-                type = Token.Type.MULTI_LINE_COMMENT;
-            } else if (match.startsWith("//")) {
-                type = Token.Type.SINGLE_LINE_COMMENT;
-            } else if (match.startsWith("\"")) {
-                type = Token.Type.STRING;
-            } else {
-                type = Token.Type.CODE;
-            }
-            
-            tokens.add(new Token(match, type));
-        }
-        
-        return tokens;
-    }
-    public static List<String> tokenizeInput(String content) {
-        List<String> tokens = new ArrayList<>();
-        List<Token> fullTokens = tokenizeJavaCode(content);
-        
-        for (Token token : fullTokens) {
-            tokens.add(token.getValue());
-        }
-        
-        return tokens;
-    }
-
     public String diamond(){
 
         int radius = (int)Math.ceil((((data.getCnt() * 1.0) / (2 * Math.PI)) + Math.round(data.getCnt() / 10.0))); // works until last point
         int maxLengthWord = 20;
         String print = "";
 
-        List<String> tokens = tokenizeInput(data.getFileContent());
+        List<String> tokens = data.getTokenList();
 
         int curRad = 0;
         boolean decrement = false;

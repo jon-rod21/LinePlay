@@ -24,11 +24,13 @@ public class LinePlay {
 
     public String runReport() throws FileNotFoundException, IOException{
         Scanner fileScan = enteredText.isEmpty() ? new Scanner(selectedFile) : new Scanner(enteredText);
-        CodeData fileData = fileReaderCounter(fileScan);
+        CodeData fileData = new CodeData(fileScan);
 
         switch (option){
             case "Line":
-                finalResult = fileData.getFileContent();
+                for (String cur : fileData.getTokenList()){
+                    finalResult += cur + " ";
+                }
                 break;
             case "Diamond":
                 OneDiamond diam = new OneDiamond(fileData);
@@ -45,37 +47,4 @@ public class LinePlay {
         }
         return finalResult;
     }
-    
-    
-
-    private static CodeData fileReaderCounter(Scanner fileScan) throws IOException{
-        String codeChunk;
-        String retString = "";
-        int cnt = 1;
-        boolean open = false;
-
-        while (fileScan.hasNext()){
-            codeChunk = fileScan.next();
-            if (codeChunk.contains("\"\"")){
-                cnt++;
-            }
-            else if (codeChunk.contains("\"") && !open){
-                open = true;
-            }
-            else if (open){
-                if (codeChunk.contains("\"")){
-                    open = false;
-                    cnt++;
-                }                   
-            }
-            else{
-                cnt++; 
-            }
-            retString += codeChunk + " ";
-            
-        }
-        return new CodeData(cnt, retString);
-    }
-
-    
 }
