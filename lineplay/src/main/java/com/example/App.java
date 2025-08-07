@@ -240,6 +240,10 @@ public class App extends Application {
         primaryStage.setScene(text_scene);
     }
 
+    /*================================= */
+    // Design Selection Scene
+    /*================================= */
+
     private void showSelection() {
         GridPane selection_gp = new GridPane();
         Scene selection_scene = new Scene(selection_gp, 600, 400);
@@ -254,7 +258,7 @@ public class App extends Application {
         ComboBox<String> selection_choice = new ComboBox<>();
         Button selection_enter = new Button("Change My Code");
 
-        selection_choice.getItems().addAll("Line", "Diamond", "Diagonal", "ZigZag");
+        selection_choice.getItems().addAll("Line", "Diamond", "Diagonal", "ZigZag", "Spiral");
         selection_choice.setValue("Line"); // Set default value
 
         RowConstraints rc = new RowConstraints();

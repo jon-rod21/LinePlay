@@ -22,9 +22,7 @@ public class OneDiamond {
         boolean rightCheck = false;
         boolean middleCheck = false;
 
-        for (String curData : tokens) {
-            
-
+        for (String curData : tokens) {  
             // Top and Bottom
             if (curRad == 0){
                 for (int i = 0; i < radius - curData.length() + 1 + maxLengthWord; i++){

@@ -7,9 +7,11 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/* works with multi-line comments too! */
+/* works with multi-line 
+comments too! */
 public class CodeData {    
     List<String> tokenList;
+    static int longest;
 
     public CodeData(Scanner content) throws IOException{    
         tokenList = tokenizeInput(content);
@@ -22,8 +24,11 @@ public class CodeData {
     public List<String> getTokenList(){
         return tokenList;
     }
+    public int getLongest(){
+        return longest;
+    }
 
-    // Currently gets everything but comments
+    
     public static List<String> tokenizeInput(Scanner fileContent) throws IOException {
         List<String> tokens = new ArrayList<>();
         
@@ -40,13 +45,14 @@ public class CodeData {
         Pattern pattern = Pattern.compile("//.*?(?=\\n|$)|/\\*[\\s\\S]*?\\*/|\"([^\"\\\\]|\\\\.)*\"|\\S+");
         Matcher matcher = pattern.matcher(processedContent);
         
+        int curMax = 0;
         while (matcher.find()) {
+            String cur = matcher.group();
+            curMax = Math.max(curMax, cur.length());
             tokens.add(matcher.group());
-            // String token = matcher.group();
-            // tokens.add(token);
-            // System.out.println("Token: '" + token + "'");
+            
         }
-        
+        longest = curMax;
         return tokens;
     }
 

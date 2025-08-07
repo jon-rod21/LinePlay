@@ -44,6 +44,10 @@ public class LinePlay {
                 ZigZag zig = new ZigZag(fileData);
                 finalResult = zig.zigZag();
                 break;
+            case "Spiral":
+                Spiral spiral = new Spiral(fileData);
+                finalResult = spiral.printSpiral();
+                break;
         }
         return finalResult;
     }
