@@ -15,7 +15,8 @@ public class Spiral {
         Spiral.data = data;
         int size = (int)Math.ceil(Math.sqrt(Spiral.data.getCnt() * 2));
         // int size = 17;
-        createMatrices(size % 2 == 0 ? size - 1 : size);
+        // createMatrices(size % 2 == 0 ? size - 1 : size);
+        createMatrices(size + 1);
         
     }
     public void createMatrices(int size){
@@ -33,12 +34,20 @@ public class Spiral {
     }
     public String printSpiral(){
         String ret = "";
+        // boolean skipCol1 = shadowMatrix[0][0] == 0;
+        // boolean skipCol2 = shadowMatrix[0][1] == 0;
         for (int i = 0; i < spiralMatrix.length; i++) {
+            
+            
             for (int j = 0; j < spiralMatrix[i].length; j++){
+                // if ((skipCol1 && j == 0) || (skipCol2 && j == 1) ){
+                //     continue;
+                // }
                 ret += spiralMatrix[i][j] + " ";
+                //System.out.println(spiralMatrix[i][j]);
             }
             ret += "\n";
-            System.out.println(Arrays.toString(spiralMatrix[i]));
+            //System.out.println(Arrays.toString(spiralMatrix[i]));
 
         }
         return ret;
@@ -61,8 +70,12 @@ public class Spiral {
                     break;
                 }
                 if (shadowMatrix[i][j] == 1){
-                    spiralMatrix[i][j] = tokenList.get(tokenListIndex);
-                    
+                    String currentSpace = spiralMatrix[i][j]; 
+                    String token = tokenList.get(tokenListIndex); 
+
+                    String newValue = currentSpace.substring(0, currentSpace.length() - token.length()) + token;
+                    spiralMatrix[i][j] = newValue;
+                    // spiralMatrix[i][j] = tokenList.get(tokenListIndex);
                     tokenListIndex++;
                 }
                 
@@ -83,7 +96,7 @@ public class Spiral {
     }
     public static void createShadow(int x, int y, int curLength, int direction, int directionLength, int lineCnt){
         
-        if (x >= 0 && y >= 0 && x < shadowMatrix.length && y < shadowMatrix[x].length && lineCnt > 0) {
+        if (x >= 0 && y >= 0 && x < shadowMatrix.length && y < shadowMatrix[x].length && lineCnt >= 0) {
             shadowMatrix[x][y] = 1;
             
             if (curLength > 0) {
@@ -104,7 +117,7 @@ public class Spiral {
             } 
             else {
                 int newDirection = (direction + 1) > 3 ? 0 : (direction + 1);
-                createShadow(x, y, directionLength + 1, newDirection, directionLength + 1, lineCnt - 1);
+                createShadow(x, y, directionLength + 1, newDirection, directionLength + 1, lineCnt);
             }
         }
     }
